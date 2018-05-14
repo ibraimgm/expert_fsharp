@@ -1,21 +1,23 @@
+module Expert.Ch01
+
 open System
 open System.Net
 open System.IO
 
-let splitAtSpaces (str : String) =  str.Split ' ' |> Array.toList
+let private splitAtSpaces (str : String) =  str.Split ' ' |> Array.toList
 
-let wordCount text =
+let private wordCount text =
     let words = splitAtSpaces text
     let nTotal = words.Length
     let nDistinct = (List.distinct words).Length
     (nTotal, nTotal - nDistinct)
 
-let showWordCount str =
+let private showWordCount str =
     let total,duplicated = wordCount str
     printfn "--> %d words in the text" total
     printfn "--> %d duplicated words" duplicated
 
-let demoStr = "Said said the same thing that was said for the man that said he said"
+let private sampleStr = "Said said the same thing that was said for the man that said he said"
 
 // showWordCount demoStr
 
@@ -29,3 +31,8 @@ let http (url : String) =
     html
 
 // http "http://www.google.com"
+
+let ch01Demos =
+    showWordCount sampleStr
+    printfn "--"
+    printfn "%s" (http "https://raw.githubusercontent.com/ibraimgm/expert_fsharp/master/README.md")
